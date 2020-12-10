@@ -1,0 +1,125 @@
+.styled-table {
+  border-collapse: collapse;
+  font-size: 0.8em;
+  font-family: sans-serif;
+  min-width: 200px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: #2b7a78;
+  color: #ffffff;
+}
+
+label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 7px 15px;
+}
+
+body {
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+#pointers {
+  position: absolute;
+}
+
+#pointers .pointer {
+  position: absolute;
+  width: 15px;
+  height: 22px;
+  background: url('https://uploads.codesandbox.io/uploads/user/88acfe5a-77fc-498c-98ee-d1b0b303f6a8/tC4n-pointer.png')
+    no-repeat -4px 0;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  margin-bottom: 15px;
+}
+#sheet {
+  border: solid 2px black;
+  background-color: white;
+}
+.round-button {
+  border-radius: 50%;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+.round-button:hover {
+  opacity: 80%;
+}
+.red {
+  background-color: red;
+  border: 1px solid crimson;
+}
+.green {
+  background-color: green;
+  border: 1px solid mediumseagreen;
+}
+.blue {
+  background-color: blue;
+  border: 1px solid midnightblue;
+}
+.selected {
+  border: solid 3px white;
+}
+
+/* -------------- */
+.relative {
+  position: relative;
+}
+:root {
+  /** .... */
+  --dropdown-background: #fff;
+  --dropdown-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.5),
+    0px 2px 6px -5px rgba(0, 0, 0, 0.75);
+}
+
+.dropdown {
+  position: absolute;
+  background-color: var(--dropdown-background);
+  padding: 4px;
+  box-shadow: var(--dropdown-shadow);
+  border-radius: 4px;
+  z-index: 1;
+  margin-left: -80px;
+  transition: all 0.25s ease-in-out;
+}
+.icon-link + .dropdown {
+  opacity: 0;
+  top: 8px;
+  visibility: hidden;
+  transition: all 0.25s ease-in-out;
+}
+.icon-link:hover + .dropdown,
+.dropdown:hover {
+  opacity: 1;
+  top: 16px;
+  visibility: visible;
+}
+.icon-link:hover + .dropdown *,
+.dropdown:hover * {
+  opacity: 1;
+}
+
+/** Color Picker */
+.box {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.box:hover,
+.box.active {
+  box-shadow: inset 0px 0px 2px 2px #fff;
+  opacity: 0.75;
+}

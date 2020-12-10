@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Socket.io whiteboard</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    function setUsername() {
+      socket.emit('setUsername', document.getElementById('username').value);
+      console.log(document.getElementById('username').value);
+    }
+    var user;
+    socket.on('userExists', function (data) {
+      document.getElementById('error').innerHTML = data;
+      // console.log(data);
+      // console.log(users);
+    });
+    socket.on('userSet', function (data) {
+      user = data.username;
+      window.location.href = 'index.html' + '#' + user;
+      // document.body.innerHTML =
+      //   '<input type = "text" id = "message">\
+      //  <button type = "button" name = "button" onclick = "sendMessage()">Send</button>\
+      //  <div id = "message-container"></div>';
+    });
+  </script>
+
+  <body>
+    <div class="container" style="border: 2px; border-color: black">
+      <p
+        style="
+          position: absolute;
+          top: 300px;
+          left: 700px;
+          z-index: 2;
+          font-size: 22px;
+        "
+      >
+        <b> ENTER USERNAME: </b>
+      </p>
+      <input
+        id="username"
+        name="username"
+        value=""
+        type="text"
+        placeholder="Enter a username of your choice..."
+        style="
+          width: 350px;
+          position: absolute;
+          top: 360px;
+          left: 700px;
+          z-index: 2;
+          font-size: 22px;
+        "
+      />
+      <button
+        type="button"
+        name="button"
+        style="
+          position: absolute;
+          top: 360px;
+          left: 1050px;
+          z-index: 2;
+          font-size: 22px;
+        "
+        onclick="setUsername()"
+      >
+        Submit
+      </button>
+      <div id="error"></div>
+    </div>
+  </body>
+</html>
