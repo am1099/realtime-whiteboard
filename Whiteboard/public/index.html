@@ -1,67 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Socket.io whiteboard</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    function setUsername() {
+      socket.emit('setUsername', document.getElementById('username').value);
+      console.log(document.getElementById('username').value);
+    }
+    var user;
+    socket.on('userExists', function (data) {
+      document.getElementById('error').innerHTML = data;
+      // console.log(data);
+      // console.log(users);
+    });
+    socket.on('userSet', function (data) {
+      user = data.username;
+      window.location.href = 'user.html' + '#' + user;
+      // document.body.innerHTML =
+      //   '<input type = "text" id = "message">\
+      //  <button type = "button" name = "button" onclick = "sendMessage()">Send</button>\
+      //  <div id = "message-container"></div>';
+    });
+  </script>
+
   <body>
-    <div class="container">
-      <div class="col-4">
-        <p
-          style="
-            font-size: 24px;
-            color: white;
-            background-color: rgb(46, 105, 107);
-            border-radius: 10px;
-            width: 250px;
-          "
-        >
-          Active Users:
-        </p>
-        <ul id="usersList">
-          <br />
-        </ul>
-      </div>
-      <div
-        class="col-4"
-        id="pointers"
-        style="position: absolute; top: 40px; left: 400px; z-index: 2"
+    <div class="container" style="border: 2px; border-color: black">
+      <p
+        style="
+          position: absolute;
+          top: 300px;
+          left: 700px;
+          z-index: 2;
+          font-size: 22px;
+        "
       >
-        <canvas
-          id="canvas"
-          width="1000px"
-          height="600px"
-          style="border: 3px solid #023c41"
-        ></canvas>
-        <div class="row">
-          <button class="btn btn-default" id="clear_button">Clear</button>
-          <!-- <button class="btn btn-default" id="eraser_button">Eraser</button> -->
-
-          <input type="color" id="color-picker" />
-          <input type="range" id="brush-size" min="1" max="25" value="6" />
-
-          <!-- <button id="blue" onclick="color(this)">Blue</button>
-          <button id="green" onclick="color(this)">Green</button>
-          <button id="red" onclick="color(this)">Red</button>
-          <button id="teal" onclick="color(this)">Teal</button>
-          <button id="white" onclick="color(this)">Eraser</button> -->
-        </div>
-      </div>
+        <b> ENTER USERNAME: </b>
+      </p>
+      <input
+        id="username"
+        name="username"
+        value=""
+        type="text"
+        placeholder="Enter a username of your choice..."
+        style="
+          width: 350px;
+          position: absolute;
+          top: 360px;
+          left: 700px;
+          z-index: 2;
+          font-size: 22px;
+        "
+      />
+      <button
+        type="button"
+        name="button"
+        style="
+          position: absolute;
+          top: 360px;
+          left: 1050px;
+          z-index: 2;
+          font-size: 22px;
+        "
+        onclick="setUsername()"
+      >
+        Submit
+      </button>
+      <div id="error"></div>
     </div>
   </body>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="script.js"></script>
-  <script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"
-  ></script>
 </html>

@@ -15,6 +15,9 @@ app.use(express.static('public'));
 // Socket setup
 const io = socket(server);
 
+app.get('/user.html', function (req, res) {
+  res.redirect('/public/user.html');
+});
 // Lists to use
 var history = [];
 users = [];
